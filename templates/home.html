@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="C:\Users\developer mood\Desktop\placement\Projects\Chatbot\static\ind.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+        <div class="chat">
+            <div class="chat-header">
+				<div class="profile">
+					<div class="left">
+						<img src="C:\Users\developer mood\Desktop\placement\Projects\Chatbot\static\logo.png" class="pp">
+						<h2>pribot</h2>
+					</div>
+         <h4>developed by <a href="https://linkedin.com/in/princekumar08/">Prince kumar</a></h4>
+                </div>
+            </div>
+
+
+            <div class="chat-box">
+
+            </div>
+            <p class="botimage"><span> <img src="C:\Users\developer mood\Desktop\placement\Projects\Chatbot\static\logo.png" class="pp"></span></p>
+    <div>
+      <div id="chatbox">
+        <p class="botText"><span>Hello there!</span></p>
+        <p class="botText"><span>I'm Pribot, a chatbot.</span></p>
+      </div>
+      <div id="userInput">
+        <textarea input id="textInput" type="text" name="msg" placeholder="Message"></textarea>
+
+          <input id="buttonInput" type="image" src="C:\Users\developer mood\Desktop\placement\Projects\Chatbot\static\send.png" alt="Submit" width="80" height="60" value="Send"/>
+      </div>
+      <script>
+        function getBotResponse() {
+          var rawText = $("#textInput").val();
+          var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
+          $("#textInput").val("");
+          $("#chatbox").append(userHtml);
+          document
+            .getElementById("userInput")
+            .scrollIntoView({ block: "start", behavior: "smooth" });
+          $.get("/get", { msg: rawText }).done(function (data) {
+            var botHtml = '<p class="botText"><span>' + data + "</span></p>";
+            $("#chatbox").append(botHtml);
+            document
+              .getElementById("userInput")
+              .scrollIntoView({ block: "start", behavior: "smooth" });
+          });
+        }
+        $("#textInput").keypress(function (e) {
+          if (e.which == 13) {
+            getBotResponse();
+          }
+        });
+        $("#buttonInput").click(function () {
+          getBotResponse();
+        });
+      </script>
+    </div>
+</div>
+    </div>
+  </body>
+</html>
